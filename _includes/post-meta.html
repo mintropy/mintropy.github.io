@@ -1,0 +1,45 @@
+{% if page.tags %}
+  {% capture tags %}
+    {% for tag in site.tags %}
+    <span class="label lable--category">
+      {{ tag[0] }}
+    </span>
+    {% endfor %}
+  {% endcapture %}
+{% endif %}
+
+{% if page.categories %}
+  {% capture categories %}
+    {% for category in page.categories %}
+      <span class="label  label--category">
+        <a href="{{ site.baseurl }}/categories/#{{ category | downcase | slugify }}">
+          {{ category }}
+        </a>
+      </span>
+      {% if forloop.last == false %},{% endif %}
+    {% endfor %}
+  {% endcapture %}
+{% elsif page.category %}
+  {% capture categories %}
+    <span class="label  label--category"><a href="{{ site.baseurl }}/categories/#{{ page.category | downcase | slugify }}">{{ page.category }}</a></span>
+  {% endcapture %}
+{% endif %}
+
+<small class="small  post-meta">
+  <time datetime="{{ page.date | date_to_xmlschema }}" class="time">
+    {{ page.date | date: "%F %a" }}
+  </time>
+  {% assign date_format = site.date_format | default: "%d %b %Y" %}
+  <br>
+  <span>
+    <!-- {{ categories | append: "&nbsp;&middot;&nbsp;" }} -->
+    <b>categories : </b>
+    {{categories}}
+  </span>
+  <br>
+  <span>
+    <!-- {{ tags | append: "&nbsp;&middot;&nbsp;" }} -->
+    <b>tags : </b>
+    {{tags}}
+  </span>
+</small>
