@@ -1,8 +1,8 @@
 {% if page.tags %}
   {% capture tags %}
-    {% for tag in site.tags %}
-    <span class="label lable--category">
-      {{ tag[0] }}
+    {% for tag in page.tags %}
+    <span class="label lable--tags">
+      {{ tag }}
     </span>
     {% endfor %}
   {% endcapture %}
